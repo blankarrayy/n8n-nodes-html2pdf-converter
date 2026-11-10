@@ -6,8 +6,6 @@
 
 Fast, lightweight HTML to PDF converter for [n8n](https://n8n.io). Generate pixel-perfect invoices, reports, receipts, and dynamic documents from HTML/CSS with zero Chromium or Puppeteer overhead.
 
-Powered by [sghtmltopdf](https://github.com/waka/sghtmltopdf) (The Second Generation wkhtmltopdf).
-
 ---
 
 ## 🚀 Why Choose This Node?
@@ -102,3 +100,4 @@ Click **Add Option** in the node to configure:
 ## 📄 License
 
 MIT License. See [LICENSE](LICENSE) for details.
+Credits to [sghtmltopdf](https://github.com/waka/sghtmltopdf)
