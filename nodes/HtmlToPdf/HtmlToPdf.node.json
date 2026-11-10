@@ -1,0 +1,19 @@
+{
+	"node": "n8n-nodes-html2pdf-converter.htmlToPdf",
+	"nodeVersion": "2.0",
+	"codexVersion": "1.0",
+	"categories": [
+		"Development",
+		"Data & Storage",
+		"Utility"
+	],
+	"resources": {
+		"credentialDocumentation": [],
+		"primaryDocumentation": [
+			{
+				"url": "https://github.com/waka/sghtmltopdf"
+			}
+		]
+	}
+}
+

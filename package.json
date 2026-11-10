@@ -1,0 +1,58 @@
+{
+  "name": "n8n-nodes-html2pdf-converter",
+  "version": "2.0.5",
+  "description": "Fast, lightweight HTML to PDF converter for n8n. Generate pixel-perfect invoices, reports, and documents from HTML/CSS with zero Chromium or Puppeteer overhead.",
+  "keywords": [
+    "pdf",
+    "html-to-pdf",
+    "html2pdf",
+    "n8n",
+    "n8n-community-node-package",
+    "pdf-generator",
+    "pdf-converter",
+    "invoice-generator",
+    "report-generator",
+    "html-converter",
+    "wkhtmltopdf",
+    "sghtmltopdf",
+    "no-chromium",
+    "puppeteer-alternative",
+    "export-pdf"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/waka/sghtmltopdf",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/waka/sghtmltopdf.git"
+  },
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc && node scripts/copy-assets.js",
+    "dev": "tsc --watch",
+    "test": "node --test dist/test/*.test.js",
+    "prepublishOnly": "npm run build"
+  },
+  "files": [
+    "dist/nodes",
+    "dist/utils",
+    "dist/index.js",
+    "dist/index.d.ts",
+    "bin"
+  ],
+  "n8n": {
+    "n8nNodesApiVersion": 1,
+    "nodes": [
+      "dist/nodes/HtmlToPdf/HtmlToPdf.node.js",
+      "dist/nodes/SgHtmlToPdf/SgHtmlToPdf.node.js"
+    ]
+  },
+  "peerDependencies": {
+    "n8n-workflow": "*"
+  },
+  "devDependencies": {
+    "@n8n/node-cli": "^0.56.1",
+    "@types/node": "^26.6.6",
+    "n8n-workflow": "^2.16.0",
+    "typescript": "^7.0.2"
+  }
+}

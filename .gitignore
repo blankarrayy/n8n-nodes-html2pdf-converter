@@ -1,0 +1,53 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Build and Transpilation Outputs
+dist/
+out/
+*.tsbuildinfo
+
+# Sensitive Credentials & Auth Tokens
+.npmrc
+.env
+.env.*
+!.env.example
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Test, Preview & Generated Output Files
+*.pdf
+*.png
+*.jpeg
+*.jpg
+test_output*
+sample_filled.html
+coverage/
+.nyc_output/
+
+# Packaging & Archives
+*.tgz
+*.tar.gz
+*.gem
+*.zip
+
+# OS Specific
+.DS_Store
+.DS_Store?
+._*
+Thumbs.db
+ehthumbs.db
+
+# IDE & Editor Files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~

@@ -1,0 +1,19 @@
+{
+	"node": "n8n-nodes-sghtmltopdf.sgHtmlToPdf",
+	"nodeVersion": "1.0",
+	"codexVersion": "1.0",
+	"categories": [
+		"Development",
+		"Data & Storage",
+		"Utility"
+	],
+	"resources": {
+		"credentialDocumentation": [],
+		"primaryDocumentation": [
+			{
+				"url": "https://github.com/waka/sghtmltopdf"
+			}
+		]
+	}
+}
+

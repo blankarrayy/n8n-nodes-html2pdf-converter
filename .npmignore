@@ -1,0 +1,11 @@
+nodes/
+test/
+scripts/
+tsconfig.json
+Dockerfile
+docker-compose.yml
+.git/
+.gitignore
+*.gem
+*.tar.gz
+*.pdf

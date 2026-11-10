@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  # Option 1: sghtmltopdf HTTP Server sidecar
+  # The n8n node connects to this via Mode: "HTTP Server" and Server URL: "http://sghtmltopdf:8080"
+  sghtmltopdf:
+    image: ghcr.io/waka/sghtmltopdf:latest
+    container_name: sghtmltopdf
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+
+  # n8n instance
+  n8n:
+    image: n8nio/n8n:latest
+    container_name: n8n
+    restart: unless-stopped
+    ports:
+      - "5678:5678"
+    environment:
+      - N8N_COMMUNITY_PACKAGES_ENABLED=true
+    volumes:
+      - n8n_data:/home/node/.n8n
+      # Mount custom node for local development / testing
+      - .:/home/node/.n8n/custom/n8n-nodes-sghtmltopdf
+    depends_on:
+      - sghtmltopdf
+
+volumes:
+  n8n_data:

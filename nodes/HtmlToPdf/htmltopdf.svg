@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+  <defs>
+    <linearGradient id="sgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E53E3E" />
+      <stop offset="100%" stop-color="#C53030" />
+    </linearGradient>
+    <linearGradient id="foldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FEB2B2" />
+      <stop offset="100%" stop-color="#E2E8F0" />
+    </linearGradient>
+  </defs>
+  <!-- Document base -->
+  <path d="M10 6C10 4.89543 10.8954 4 12 4H28L38 14V42C38 43.1046 37.1046 44 36 44H12C10.8954 44 10 43.1046 10 42V6Z" fill="#F7FAFC" stroke="#CBD5E0" stroke-width="2" stroke-linejoin="round"/>
+  <!-- Fold corner -->
+  <path d="M28 4V14H38" fill="url(#foldGrad)" stroke="#CBD5E0" stroke-width="2" stroke-linejoin="round"/>
+  <!-- PDF Badge -->
+  <rect x="6" y="24" width="22" height="12" rx="3" fill="url(#sgGrad)"/>
+  <text x="17" y="32.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="7.5" font-weight="bold" fill="#FFFFFF" text-anchor="middle">PDF</text>
+  <!-- HTML code brackets </> -->
+  <path d="M33 24L37 28L33 32" fill="none" stroke="#4A5568" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M27 22L23 34" fill="none" stroke="#E53E3E" stroke-width="1.8" stroke-linecap="round"/>
+</svg>

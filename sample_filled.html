@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <style>
+        body {
+            font-family: Helvetica, Arial, sans-serif;
+            color: #0f172a;
+            margin: 0;
+            padding: 0;
+            font-size: 12px
+        }
+
+        .hero {
+            background: #0b3d5c;
+            color: #fff;
+            padding: 22px 28px
+        }
+
+        .kicker {
+            font-size: 10px;
+            letter-spacing: 2px;
+            opacity: .75
+        }
+
+        h1 {
+            margin: 6px 0 4px;
+            font-size: 26px
+        }
+
+        .sub {
+            font-size: 12px;
+            opacity: .85;
+            line-height: 1.5
+        }
+
+        .stats {
+            display: flex;
+            gap: 10px;
+            padding: 14px 28px 4px
+        }
+
+        .stat {
+            flex: 1;
+            background: #eef6fb;
+            border-radius: 8px;
+            padding: 10px;
+            text-align: center
+        }
+
+        .stat b {
+            display: block;
+            font-size: 20px;
+            color: #0b3d5c
+        }
+
+        .stat span {
+            font-size: 10px;
+            color: #475569
+        }
+
+        h2 {
+            font-size: 15px;
+            margin: 16px 28px 8px;
+            color: #0b3d5c
+        }
+
+        .sec {
+            page-break-inside: avoid
+        }
+
+        .duo {
+            display: flex;
+            gap: 10px;
+            margin: 0 28px
+        }
+
+        .shot {
+            flex: 1;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            overflow: hidden
+        }
+
+        .shot img {
+            width: 100%;
+            display: block
+        }
+
+        .cap {
+            padding: 6px 8px;
+            font-size: 10px;
+            color: #475569;
+            line-height: 1.4
+        }
+
+        .callout {
+            margin: 10px 28px;
+            padding: 10px 14px;
+            border-radius: 4px;
+            font-size: 12px;
+            line-height: 1.5
+        }
+
+        .ok {
+            background: #ecfdf5;
+            border-left: 4px solid #10b981
+        }
+
+        .warn {
+            background: #fff7ed;
+            border-left: 4px solid #f97316
+        }
+
+        .bad {
+            background: #fef2f2;
+            border-left: 4px solid #ef4444
+        }
+
+        table {
+            width: calc(100% - 56px);
+            margin: 0 28px;
+            border-collapse: collapse;
+            font-size: 11px
+        }
+
+        th {
+            background: #0b3d5c;
+            color: #fff;
+            text-align: left;
+            padding: 6px 8px
+        }
+
+        td {
+            padding: 5px 8px;
+            border-bottom: 1px solid #e2e8f0;
+            vertical-align: top
+        }
+
+        ul {
+            margin: 4px 28px;
+            padding-left: 18px;
+            line-height: 1.5
+        }
+
+        .foot {
+            margin: 18px 28px;
+            font-size: 9px;
+            color: #64748b;
+            line-height: 1.5
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="hero">
+        <div class="kicker">FLOOD RISK INTELLIGENCE · INSURED PORTFOLIO EVIDENCE REPORT</div>
+        <h1>Vijayawada - Krishna River & Budameru Basin, Andhra Pradesh</h1>
+        <div class="sub">Zone ID ZN-VJA-01 · Peril: flood · Portfolio scanned: 45 active policies<br>Generated 11 Nov 2026, 02:38 (Asia/Kolkata) · boundary 80.54, 16.48 to 80.72, 16.6 · Peril: flood ·
+            Portfolio scanned: <b>1</b><span>Properties inside new flood water (of 45)</span>)</span></div>
+        <div class="stat"><b><b>INR 4,00,00,000</b><span>Sum insured exposed</span>%</b><span>Zone covered by water (latest, estimate)</span></div>
+        <div class="stat"><b><b>0 mm</b><span>Rain in last 3 days</span></b><span>Verdict · confidence {{ $('Flood Intelligence Analysis
+                Agent').first().json.output.confidence }}</span></div>
+    </div>
+
+    {{ '<div
+        class="callout ' + ($('Flood Intelligence Analysis Agent').first().json.output.flood_status === 'NO_FLOOD' ? 'ok' : ($('Flood Intelligence Analysis Agent').first().json.output.flood_status === 'WATCH' ? 'warn' : 'bad')) + '">
+        <b>Recommended action:</b> ' + $('Flood Intelligence Analysis Agent').first().json.output.recommended_action +
+        '<br><b>Claims surge outlook:</b> ' + $('Flood Intelligence Analysis
+        Agent').first().json.output.claims_surge_outlook + '</div>' }}
+
+    <div class="sec">
+        <h2>Radar evidence (Sentinel-1 VV, dark = water)</h2>
+        <div class="duo">
+            <div class="shot">
+                <img src="{{ (() => { 
+      const raw = $('Post Baseline Radar to Planetary API').first().json; 
+      const p = typeof raw.data === 'string' ? JSON.parse(raw.data) : (raw.features ? raw : JSON.parse(raw)); 
+      const id = p.features && p.features[0] ? p.features[0].id : ''; 
+      const z = $('Read Active Flood Zone from Sheets').first().json; 
+      return 'https://planetarycomputer.microsoft.com/api/data/v1/item/bbox/' + z.west + ',' + z.south + ',' + z.east + ',' + z.north + '.png?collection=sentinel-1-rtc&item=' + id + '&assets=vv&rescale=0,0.4&colormap_name=gray&max_size=900'; 
+    })() }}">
+                <div class="cap">
+                    <b>Baseline · Sentinel-1 RTC</b><br>
+                    {{ (() => {
+                    const raw = $('Post Baseline Radar to Planetary API').first().json;
+                    const p = typeof raw.data === 'string' ? JSON.parse(raw.data) : (raw.features ? raw :
+                    JSON.parse(raw));
+                    return p.features && p.features[0] && p.features[0].properties ? (p.features[0].properties.datetime
+                    || '').slice(0, 10) : '';
+                    })() }} ·
+                    {{ (() => {
+                    const raw = $('Post Baseline Radar to Planetary API').first().json;
+                    const p = typeof raw.data === 'string' ? JSON.parse(raw.data) : (raw.features ? raw :
+                    JSON.parse(raw));
+                    return p.features && p.features[0] && p.features[0].properties ?
+                    p.features[0].properties['sat:orbit_state'] : '';
+                    })() }} orbit
+                </div>
+            </div>
+            <div class="shot">
+                <img src="{{ (() => { 
+      const raw = $('Post Latest Radar to Planetary API').first().json; 
+      const p = typeof raw.data === 'string' ? JSON.parse(raw.data) : (raw.features ? raw : JSON.parse(raw)); 
+      const id = p.features && p.features[0] ? p.features[0].id : ''; 
+      const z = $('Read Active Flood Zone from Sheets').first().json; 
+      return 'https://planetarycomputer.microsoft.com/api/data/v1/item/bbox/' + z.west + ',' + z.south + ',' + z.east + ',' + z.north + '.png?collection=sentinel-1-rtc&item=' + id + '&assets=vv&rescale=0,0.4&colormap_name=gray&max_size=900'; 
+    })() }}">
+                <div class="cap">
+                    <b>Latest · Sentinel-1 RTC</b><br>
+                    {{ (() => {
+                    const raw = $('Post Latest Radar to Planetary API').first().json;
+                    const p = typeof raw.data === 'string' ? JSON.parse(raw.data) : (raw.features ? raw :
+                    JSON.parse(raw));
+                    return p.features && p.features[0] && p.features[0].properties ? (p.features[0].properties.datetime
+                    || '').slice(0, 10) : '';
+                    })() }} ·
+                    {{ (() => {
+                    const raw = $('Post Latest Radar to Planetary API').first().json;
+                    const p = typeof raw.data === 'string' ? JSON.parse(raw.data) : (raw.features ? raw :
+                    JSON.parse(raw));
+                    return p.features && p.features[0] && p.features[0].properties ?
+                    p.features[0].properties['sat:orbit_state'] : '';
+                    })() }} orbit · works through cloud
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="sec">
+        <h2>Flood extent and rainfall</h2>
+        <div class="stats">
+            <div class="stat"><b>~{{ $('Flood Intelligence Analysis
+                    Agent').first().json.output.flooded_area_baseline_percent }}%</b><span>Water coverage,
+                    baseline</span></div>
+            <div class="stat"><b>~{{ $('Flood Intelligence Analysis
+                    Agent').first().json.output.flooded_area_latest_percent }}%</b><span>Water coverage, latest</span>
+            </div>
+            <div class="stat"><b>{{ $('Flood Intelligence Analysis
+                    Agent').first().json.output.flooded_area_latest_percent - $('Flood Intelligence Analysis
+                    Agent').first().json.output.flooded_area_baseline_percent > 0 ? '+' : '' }}{{ $('Flood Intelligence
+                    Analysis Agent').first().json.output.flooded_area_latest_percent - $('Flood Intelligence Analysis
+                    Agent').first().json.output.flooded_area_baseline_percent }} pts</b><span>Change in water
+                    coverage</span></div>
+        </div>
+        <div class="callout ok" style="background:#eef6fb;border-left-color:#0b3d5c">{{ $('Flood Intelligence Analysis
+            Agent').first().json.output.flood_extent_summary }}</div>
+        <div class="callout ok" style="background:#eef6fb;border-left-color:#0b3d5c"><b>Rainfall:</b> {{ $('Flood
+            Intelligence Analysis Agent').first().json.output.rainfall_assessment }}</div>
+        <table>
+            <tr>
+                <th>Date</th>
+                <th>Rain (mm)</th>
+                <th>Max rain probability</th>
+            </tr>
+            {{ $('Fetch Rainfall Forecast Data').first().json.daily.time.map((d, i) => '<tr>
+                <td>' + d + '</td>
+                <td>' + $('Fetch Rainfall Forecast Data').first().json.daily.precipitation_sum[i] + '</td>
+                <td>' + $('Fetch Rainfall Forecast Data').first().json.daily.precipitation_probability_max[i] + '%</td>
+            </tr>').join('') }}
+        </table>
+        <ul>{{ ($('Flood Intelligence Analysis Agent').first().json.output.key_observations || []).map(c => '<li>' + c +
+                '</li>').join('') }}</ul>
+    </div>
+
+    <div class="sec">
+        <h2>Insured properties inside newly flooded pixels (top 25 by sum insured)</h2>
+        <div class="callout ok" style="background:#eef6fb;border-left-color:#0b3d5c">{{ $('Flood Intelligence Analysis
+            Agent').first().json.output.exposure_commentary }}</div>
+        <table>
+            <tr>
+                <th>Property</th>
+                <th>Address</th>
+                <th>Sum insured ({{ $('Read Active Flood Zone from Sheets').first().json.currency }})</th>
+                <th>VV baseline → latest</th>
+            </tr>
+            {{ ($('Aggregate Property Exposure Data').first().json.properties || []).filter(p => p.property_id).length ?
+            [...($('Aggregate Property Exposure Data').first().json.properties || []).filter(p =>
+            p.property_id)].sort((a, b) => Number(b.sum_insured) - Number(a.sum_insured)).slice(0, 25).map(p => '<tr>
+                <td>' + p.property_id + '</td>
+                <td>' + p.address + '</td>
+                <td>' + Number(p.sum_insured).toLocaleString('en-IN') + '</td>
+                <td>' + Number(p.baseline_vv).toFixed(3) + ' → ' + Number(p.latest_vv).toFixed(3) + '</td>
+            </tr>').join('') : '<tr>
+                <td colspan="4">No insured properties detected inside newly flooded pixels.</td>
+            </tr>' }}
+        </table>
+    </div>
+
+    <div class="sec">
+        <h2>Scene audit trail</h2>
+        <table>
+            <tr>
+                <th>Role</th>
+                <th>Collection</th>
+                <th>STAC item ID</th>
+                <th>Acquired (UTC)</th>
+            </tr>
+            <tr>
+                <td>Baseline</td>
+                <td>sentinel-1-rtc</td>
+                <td>{{ (() => {
+                    const raw = $('Post Baseline Radar to Planetary API').first().json;
+                    const p = typeof raw.data === 'string' ? JSON.parse(raw.data) : (raw.features ? raw :
+                    JSON.parse(raw));
+                    return p.features && p.features[0] ? p.features[0].id : '';
+                    })() }}</td>
+                <td>{{ (() => {
+                    const raw = $('Post Baseline Radar to Planetary API').first().json;
+                    const p = typeof raw.data === 'string' ? JSON.parse(raw.data) : (raw.features ? raw :
+                    JSON.parse(raw));
+                    return p.features && p.features[0] && p.features[0].properties ? p.features[0].properties.datetime :
+                    '';
+                    })() }}</td>
+            </tr>
+            <tr>
+                <td>Latest</td>
+                <td>sentinel-1-rtc</td>
+                <td>{{ (() => {
+                    const raw = $('Post Latest Radar to Planetary API').first().json;
+                    const p = typeof raw.data === 'string' ? JSON.parse(raw.data) : (raw.features ? raw :
+                    JSON.parse(raw));
+                    return p.features && p.features[0] ? p.features[0].id : '';
+                    })() }}</td>
+                <td>{{ (() => {
+                    const raw = $('Post Latest Radar to Planetary API').first().json;
+                    const p = typeof raw.data === 'string' ? JSON.parse(raw.data) : (raw.features ? raw :
+                    JSON.parse(raw));
+                    return p.features && p.features[0] && p.features[0].properties ? p.features[0].properties.datetime :
+                    '';
+                    })() }}</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="foot">
+        <b>Limitations:</b> {{ $('Flood Intelligence Analysis Agent').first().json.output.limitations }}<br>
+        Property exposure is determined by sampling Sentinel-1 backscatter at each insured coordinate (newly flooded =
+        dark in the latest scene, not dark in the baseline, VV threshold {{ Number($('Read Active Flood Zone from
+        Sheets').first().json.water_vv_threshold || 0.02) }}). Radar-derived flood detection is indicative only: it can
+        miss flooding under dense vegetation or among buildings and can mistake smooth surfaces for water. It is not a
+        loss adjustment, survey or engineering assessment and should be used to prioritise claims readiness and site
+        checks. Imagery: contains modified Copernicus Sentinel data, served via the Microsoft Planetary Computer.
+        Generated {{ $now.toFormat('dd LLL yyyy, HH:mm') }} by blankarray.
+    </div>
+</body>
+
+</html>
